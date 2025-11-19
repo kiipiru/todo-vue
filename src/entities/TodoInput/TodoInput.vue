@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { todo } from 'node:test'
 import { ref } from 'vue'
-const emit = defineEmits(['input added'])
-const isValid = ref(true)
-const todoText = ref('')
+const emit = defineEmits(['input-submitted'])
+const isValid = ref<boolean>(true)
+const todoText = ref<string>('')
 function handleTodoAdd() {
     if (todoText.value && todoText.value.trim()) {
-      emit('input added')
+      emit('input-submitted', todoText.value)
       todoText.value = "";
       isValid.value = true;
     } else {
@@ -18,7 +17,7 @@ function handleTodoAdd() {
 <template>
      <div
       :class="['input_container', {input_container_invalid: !isValid}]"
-      @blur="isValid = true"
+      @focusout="isValid = true"
     >
       <button
         :class="['button', 'button_chevron', {button_chevron_invalid: !isValid}]"
@@ -27,13 +26,12 @@ function handleTodoAdd() {
       <input
         class="input_todo"
         v-model="todoText"
-        :class="['']"
         @keydown='(e) => {
           if (e.key === "Enter") handleTodoAdd();
         }'
         placeholder=""
         aria-labelledby="todo-placeholder"
-        :aria-invalid='isValid'
+        :aria-invalid='!isValid'
       />
       <label
         :class="['input_placeholder', {input_placeholder_invalid: !isValid}]"
@@ -47,7 +45,7 @@ function handleTodoAdd() {
 <style>
 .button_chevron {
   transition: filter 0.25s;
-  background-image: url("../assets/chevron.svg");
+  background-image: url("../../assets/chevron.svg");
   background-size: 12px 14px;
   background-repeat: no-repeat;
   background-position: center;
@@ -57,6 +55,7 @@ function handleTodoAdd() {
   justify-self: center;
   align-self: center;
   box-sizing: content-box;
+  border: none;
 }
 
 .button_chevron_invalid {
