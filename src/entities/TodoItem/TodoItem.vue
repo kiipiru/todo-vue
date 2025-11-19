@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { todo } from '@/types/types';
+
 const props = defineProps<{ todo: todo }>();
 const emit = defineEmits(["todo-status-changed"]);
 </script>

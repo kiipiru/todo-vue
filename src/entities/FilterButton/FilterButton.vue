@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { filter } from '@/types/types';
+
 const props = defineProps<{title: filter, isActive: boolean}>()
 const emit = defineEmits(['filter-selected'])
 </script>

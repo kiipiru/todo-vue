@@ -4,6 +4,7 @@ import TodoInput from "./entities/TodoInput/TodoInput.vue";
 import TodoItem from "./entities/TodoItem/TodoItem.vue";
 import FilterButton from "./entities/FilterButton/FilterButton.vue";
 import "./fonts.css";
+import type { filter, todo } from "./types/types";
 let key = 1;
 const todos = ref<todo[]>([]);
 const filters = ref<filter[]>(["all", "active", "completed"]);
